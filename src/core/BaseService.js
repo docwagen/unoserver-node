@@ -22,6 +22,15 @@ class BaseService {
    */
   _BASE_CMD = null;
 
+  /**
+   * to specify whether debug messages should be outputted to the console
+   */
+  _shouldDebug = false;
+
+  constructor(shouldDebug = false) {
+    this._shouldDebug = shouldDebug;
+  }
+
   #getDebug() {
     return debugFactory(this._BASE_CMD);
   }
@@ -43,14 +52,15 @@ class BaseService {
    * @returns self
    */
   allowDebug() {
-    this._inputArgs["shouldDebug"] = true;
+    this._shouldDebug = true;
     return this;
   }
 
   /**
-   * Build array of inputted arguments according to accepted Unoserver syntax for the command
+   * Build array of inputted arguments according to accepted Unoserver syntax for the command.
+   * Can be overridden by sub-classes to add unique arguments
    */
-  #prepareCmdArgs() {
+  _prepareCmdArgs() {
     const cmdArgs = [];
     const cmdArgsMap = this._CMD_ARGS_MAP;
     const inputArgs = this._inputArgs;
@@ -80,8 +90,7 @@ class BaseService {
   #runCmd() {
     const debug = this.#getDebug();
     const runCallback = this._runCallback;
-    const inputArgs = this._inputArgs;
-    const shouldDebug = "shouldDebug" in inputArgs && inputArgs["shouldDebug"];
+    const shouldDebug = this._shouldDebug;
     const baseCmd = this._BASE_CMD;
 
     const stdout = [];
@@ -90,7 +99,7 @@ class BaseService {
       debugFactory.enable(baseCmd);
     }
 
-    const cmdArgs = this.#prepareCmdArgs();
+    const cmdArgs = this._prepareCmdArgs();
     const cmdRan = `${baseCmd} ${cmdArgs.join(" ")}`;
     debug(`Running command: ${cmdRan}`);
     const subProcess = spawn(baseCmd, cmdArgs);
