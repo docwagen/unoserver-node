@@ -1,0 +1,24 @@
+{
+  "name": "node-unoserver",
+  "version": "1.0.0",
+  "description": "NodeJS Unoserver Wrapper to convert between different document formats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "unoserver",
+    "libreoffice",
+    "unoconv",
+    "document",
+    "converter"
+  ],
+  "author": "Nonso Mgbechi <mgbechinonso@gmail.com> (https://kingdageek.github.io)",
+  "license": "MIT",
+  "contributors": [
+    "Niyi Omotoso <omoniyiomotoso@gmail.com> (https://niyiomotoso.github.io)"
+  ],
+  "dependencies": {
+    "debug": "^4.3.4"
+  }
+}
