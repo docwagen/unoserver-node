@@ -106,7 +106,7 @@ class Unocompare extends BaseService {
   }
 
   #validateRequiredCmdArgs() {
-    for (const cmdArg in this.#requiredCmdArgs) {
+    for (const cmdArg of this.#requiredCmdArgs) {
       if (!(cmdArg in this._inputArgs) || !this._inputArgs[cmdArg]) {
         throw new Error(`${cmdArg} must be set and valid`);
       }

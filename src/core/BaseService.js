@@ -132,7 +132,7 @@ class BaseService {
         return;
       }
 
-      debug("%o", err);
+      debug("Failed to start command process with error: \n%o", err);
     });
 
     debug(`Finished executing: ${cmdRan}`);
