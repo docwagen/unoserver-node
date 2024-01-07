@@ -113,7 +113,7 @@ class BaseService {
     });
 
     subProcess.on("close", (code) => {
-      debug("node-unoserver finished with code: %s", code);
+      debug("unoserver-node finished with code: %s", code);
       if (stderr.length) {
         const error = new Error(Buffer.concat(stderr).toString("utf8"));
         debug("%o", error);
