@@ -1,5 +1,5 @@
 {
-  "name": "node-unoserver",
+  "name": "@docwagen/unoserver-node",
   "version": "1.0.0",
   "description": "NodeJS Unoserver Wrapper to convert between different document formats",
   "main": "index.js",
@@ -20,5 +20,14 @@
   ],
   "dependencies": {
     "debug": "^4.3.4"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/docwagen/unoserver-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/docwagen/unoserver-node/issues"
+  },
+  "homepage": "https://github.com/docwagen/unoserver-node#readme"
 }
