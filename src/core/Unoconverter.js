@@ -120,9 +120,6 @@ class Unoconverter extends BaseService {
 
     #validateRequiredCmdArgs() {
         for (const cmdArg of this.#requiredCmdArgs) {
-            console.log(this.#requiredCmdArgs);
-            console.log(this._inputArgs)
-            console.log(cmdArg)
             if (!(cmdArg in this._inputArgs) || !this._inputArgs[cmdArg]) {
                 throw new Error(`${cmdArg} must be set and valid`);
             }
