@@ -1,5 +1,5 @@
 {
-  "name": "node-unoserver",
+  "name": "unoserver-node",
   "version": "1.0.0",
   "description": "NodeJS Unoserver Wrapper to convert between different document formats",
   "main": "index.js",
