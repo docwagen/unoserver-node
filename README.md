@@ -52,6 +52,34 @@ The following attributes can be set (their descriptions are mostly from the [uno
 #### Running the unoconvert command
 
 The `Unoconverter` class supports the `unoconvert` command. This connects to a listener to try to convert a document into different, supported formats.
+See the example code snippet below:
+
+```js
+const { Unoconverter } = require("unoserver-node");
+const unoConvertProcess = new Unoconverter(true)
+  .setInFile(IN_FILE_PATH)
+  .setConvertTo("pdf")
+  .setOutFile(OUT_FILE_PATH)
+  .run();
+```
+
+The server must be running before this command is executed. The following attributes are available:
+
+- **_convertTo_**: The file type/extension of the result output file (ex pdf). Required when using stdout.
+
+- **_filter_**: The export filter to use when converting. It is selected automatically if not specified.
+
+- **_filterOption_**: Pass an option for the export filter, in name=value format. Use true/false for boolean values. The unoserver library supports repeating this flag for multiple options, this is currently not available in this package, just one option is allowed. This will change for future versions.
+
+- **_host_**: The server host. Defaults to "127.0.0.1".
+
+- **_port_**: The server port, defaults to "2002".
+
+- **_hostLocation_**: This determines the handling of files and can only be one of three values - `auto`, `remote`, and `local`. If you run the client on the same machine as the server, it can be set to `local`, and the files are sent as paths. If they are different machines, it is `remote` and the files are sent as binary data. Default is `auto`, and it will send the file as a path if the host is `127.0.0.1` or `localhost`, and binary data for other hosts.
+
+- **_inFile_**: The path to the file to be converted (for stdin). This attribute is required.
+
+- **_outFile_**: The path to the converted file (for stdout). Also required.
 
 #### Running the unocompare command
 
@@ -66,7 +94,7 @@ const unoCompareProcess = new Unocompare(true)
   .run();
 ```
 
-The server must be running before this command is executed. The following attributes are available:
+The server must also be running before this command is executed. The following attributes are available:
 
 - **_fileType_**: The file type/extension of the result output file (ex pdf). Required when using stdout.
 
