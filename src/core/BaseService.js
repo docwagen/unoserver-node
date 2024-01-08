@@ -139,6 +139,10 @@ class BaseService {
     return subProcess;
   }
 
+  /**
+   * Executes built command
+   * @returns ChildProcessWithoutNullStreams
+   */
   run() {
     // validate that necessary attributes are properly set
     if (Object.keys(this._CMD_ARGS_MAP).length === 0) {
