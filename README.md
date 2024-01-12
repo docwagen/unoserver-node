@@ -57,10 +57,22 @@ See the example code snippet below:
 ```js
 const { Unoconverter } = require("unoserver-node");
 const unoConvertProcess = new Unoconverter(true)
-  .setInFile(IN_FILE_PATH)
   .setConvertTo("pdf")
-  .setOutFile(OUT_FILE_PATH)
+  .addFilterOption("UseLosslessCompression", true)
+  .addFilterOption("Watermark", "DocWagen")
+  .addFilterOption("EncryptFile", false)
+  .setInFile("README.md") // relative paths are relative to the location unoserver was started in
+  .setOutFile("README.pdf")
   .run();
+
+// When a callback function is not set via the `setRunCallback(callback)` method, the run() method returns a promise
+if (isPromise(unoConvertProcess)) {
+  unoConvertProcess
+    .then((data) => console.log(data))
+    .catch((err) => {
+      console.log("Unoconverter erroerd: ", err);
+    });
+}
 ```
 
 The server must be running before this command is executed. The following attributes are available:
@@ -69,7 +81,7 @@ The server must be running before this command is executed. The following attrib
 
 - **_filter_**: The export filter to use when converting. It is selected automatically if not specified.
 
-- **_filterOption_**: Pass an option for the export filter, in name=value format. Use true/false for boolean values. The unoserver library supports repeating this flag for multiple options, this is currently not available in this package, just one option is allowed. This will change for future versions.
+- **_filterOption_**: Pass an option for the export filter, in name=value format. Use true/false for boolean values. The unoserver library supports repeating this flag for multiple options, this can be achieved by chaining the `addFilterOption(name, value)` method as many times as the number of filter options desired
 
 - **_host_**: The server host. Defaults to "127.0.0.1".
 

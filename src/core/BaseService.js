@@ -79,6 +79,14 @@ class BaseService {
         case "boolean":
           if (argValue) cmdArgs.push(actualArg);
           break;
+        case "object":
+          const arr = Object.keys(argValue);
+          for (const index in arr) {
+            const key = arr[index];
+            const value = `${key}=${String(argValue[key])}`;
+            cmdArgs.push(actualArg, value);
+          }
+          break;
         case "string":
         default:
           cmdArgs.push(actualArg, String(argValue));
@@ -141,7 +149,7 @@ class BaseService {
 
   /**
    * Executes built command
-   * @returns ChildProcessWithoutNullStreams
+   * @returns ChildProcessWithoutNullStreams | Promise<String | Buffer>
    */
   run() {
     // validate that necessary attributes are properly set
@@ -159,20 +167,23 @@ class BaseService {
 
     // if no callback is defined, return a promise and assign a default callback to resolve or reject it
     if (this._runCallback === null) {
-      // return new Promise((resolve, reject) => {
-      //   this._runCallback = (result, error) => {
-      //     console.log("executing callback");
-      //     return error ? reject(error) : resolve(result);
-      //   };
-      //   console.log("runcallback", this._runCallback);
-      //   return this.#runCmd();
-      // });
-      this._runCallback = (result, error) => {
-        return error ? Promise.reject(error) : Promise.resolve(result);
-      };
+      return new Promise((resolve, reject) => {
+        this._runCallback = (result, error) => {
+          console.log("executing callback...");
+          return error ? reject(error) : resolve(result);
+        };
+        // console.log("runcallback", this._runCallback);
+        return this.#runCmd();
+      });
     }
 
     return this.#runCmd();
+  }
+
+  printCmd() {
+    const cmdArgs = this._prepareCmdArgs();
+    const cmdRan = `${this._BASE_CMD} ${cmdArgs.join(" ")}`;
+    console.log("Constructed command: ", cmdRan);
   }
 }
 module.exports = BaseService;
