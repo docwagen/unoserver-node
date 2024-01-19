@@ -56,12 +56,13 @@ See the example code snippet below:
 
 ```js
 const { Unoconverter } = require("unoserver-node");
+// relative paths are relative to the location unoserver was started in so, recommended to use absolute paths
 const unoConvertProcess = new Unoconverter(true)
   .setConvertTo("pdf")
   .addFilterOption("UseLosslessCompression", true)
   .addFilterOption("Watermark", "DocWagen")
   .addFilterOption("EncryptFile", false)
-  .setInFile("README.md") // relative paths are relative to the location unoserver was started in
+  .setInFile("README.md")
   .setOutFile("README.pdf")
   .run();
 
@@ -73,6 +74,13 @@ if (isPromise(unoConvertProcess)) {
       console.log("Unoconverter erroerd: ", err);
     });
 }
+
+// converting with the `execCmd` async method
+const { stdout, stderr } = await new Unoconverter(true)
+  .setConvertTo("pdf")
+  .setInFile("README.md")
+  .setOutFile("readme.pdf")
+  .execCmd();
 ```
 
 The server must be running before this command is executed. The following attributes are available:
