@@ -1,5 +1,7 @@
 const { spawn } = require("child_process");
 const debugFactory = require("debug");
+const util = require("util");
+const exec = util.promisify(require("child_process").exec);
 
 class BaseService {
   /**
@@ -147,11 +149,7 @@ class BaseService {
     return subProcess;
   }
 
-  /**
-   * Executes built command
-   * @returns ChildProcessWithoutNullStreams | Promise<String | Buffer>
-   */
-  run() {
+  #validateImportantAttributes() {
     // validate that necessary attributes are properly set
     if (Object.keys(this._CMD_ARGS_MAP).length === 0) {
       throw new Error(
@@ -164,6 +162,14 @@ class BaseService {
         "Base command not defined or direct initialization of BaseService attempted"
       );
     }
+  }
+
+  /**
+   * Executes built command
+   * @returns ChildProcessWithoutNullStreams | Promise<String | Buffer>
+   */
+  run() {
+    this.#validateImportantAttributes();
 
     // if no callback is defined, return a promise and assign a default callback to resolve or reject it
     if (this._runCallback === null) {
@@ -180,10 +186,31 @@ class BaseService {
     return this.#runCmd();
   }
 
+  /**
+   * Async method that runs prepared command with a promisified child_process `exec(...)` function.
+   * Will return a promise that resolves an object - {stdout, stderr}
+   */
+  async execCmd() {
+    this.#validateImportantAttributes();
+    const cmdRan = this.getCmd();
+    const debug = this.#getDebug();
+    debug(`Running command via exec: ${cmdRan}`);
+    // return {stdout, stderr}
+    const { stdout, stderr } = await exec(cmdRan);
+    debug(`stdout: ${stdout}`);
+    debug(`stderr: ${stderr}`);
+    return { stdout, stderr };
+  }
+
   printCmd() {
     const cmdArgs = this._prepareCmdArgs();
     const cmdRan = `${this._BASE_CMD} ${cmdArgs.join(" ")}`;
     console.log("Constructed command: ", cmdRan);
+  }
+
+  getCmd() {
+    const cmdArgs = this._prepareCmdArgs();
+    return `${this._BASE_CMD} ${cmdArgs.join(" ")}`;
   }
 }
 module.exports = BaseService;

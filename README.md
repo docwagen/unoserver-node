@@ -47,7 +47,7 @@ The following attributes can be set (their descriptions are mostly from the [uno
 
 - **_libreOfficeUserProfilePath_**: the path to the LibreOffice user profile. Will default to a dyamically created temporary directory.
 
-- **_processIdFile_**: the path to a file that the LibreOffice Process ID will be written to. If unoserver is run as a daemon, this file will nt be deleted when unoserver exits.
+- **_processIdFile_**: the path to a file that the LibreOffice Process ID will be written to. If unoserver is run as a daemon, this file will not be deleted when unoserver exits.
 
 #### Running the unoconvert command
 
