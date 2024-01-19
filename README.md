@@ -10,6 +10,12 @@ To use this package in your node projects, you need to install the following on 
 1. LibreOffice: see installation instructions for your OS platform [here](https://www.libreoffice.org/get-help/install-howto/)
 2. Unoserver: see installation instructions [here](https://github.com/unoconv/unoserver#installation)
 
+### Installation
+
+```sh
+npm i @docwagen/unoserver-node
+```
+
 ### Usage
 
 Unoserver-Node provides three (3) modules that contain classes that support the three commands provided by unoserver (`unoserver`, `unoconvert`, and `unocompare`). It is worth noting that `unoserver` must be running before the other commands are run.
@@ -22,7 +28,7 @@ The arguments or flags to the `unoserver` command are represented as attributes 
 This way of representing command arguments as attributes and allowing the chaining of class setter methods is general to all the core classes.
 
 ```js
-const { Unoserver } = require("unoserver-node");
+const { Unoserver } = require("@docwagen/unoserver-node");
 // constructor of all core can accept a `shouldDebug` optional, boolean parameter that specifies if execution messages should be printed to console
 // setting `shouldDebug = true` is similar to calling the `allowDebug()` method on all objects of the core classes
 const unoserver = new Unoserver(true);
@@ -55,7 +61,7 @@ The `Unoconverter` class supports the `unoconvert` command. This connects to a l
 See the example code snippet below:
 
 ```js
-const { Unoconverter } = require("unoserver-node");
+const { Unoconverter } = require("@docwagen/unoserver-node");
 // relative paths are relative to the location unoserver was started in so, recommended to use absolute paths
 const unoConvertProcess = new Unoconverter(true)
   .setConvertTo("pdf")
@@ -106,7 +112,7 @@ The server must be running before this command is executed. The following attrib
 The `unocompare` command is supported by the `Unocompare` class, which connects to a listener, tries to compare two documents, and converts the resulting document. See an example code snippet below:
 
 ```js
-const { Unocompare } = require("unoserver-node");
+const { Unocompare } = require("@docwagen/unoserver-node");
 const unoCompareProcess = new Unocompare(true)
   .setOldFile(OLD_FILE_PATH)
   .setNewFile(NEW_FILE_PATH)
