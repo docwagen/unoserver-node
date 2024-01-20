@@ -9,7 +9,7 @@ class Unocompare extends BaseService {
     hostLocation: "--host-location",
   };
 
-  #validHostLocations = ["auto", "local", "remote"];
+  #validHostLocations = { auto: "auto", local: "local", remote: "remote" };
 
   #requiredCmdArgs = ["oldFile", "newFile", "outFile"];
 
