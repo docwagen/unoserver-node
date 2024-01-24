@@ -34,7 +34,11 @@ class BaseService {
   }
 
   #getDebug() {
-    return debugFactory(this._BASE_CMD);
+    const moduleDebug = debugFactory(this._BASE_CMD);
+    if (this._shouldDebug) {
+      debugFactory.enable(this._BASE_CMD);
+    }
+    return moduleDebug;
   }
 
   /**
@@ -100,14 +104,10 @@ class BaseService {
   #runCmd() {
     const debug = this.#getDebug();
     const runCallback = this._runCallback;
-    const shouldDebug = this._shouldDebug;
     const baseCmd = this._BASE_CMD;
 
     const stdout = [];
     const stderr = [];
-    if (shouldDebug) {
-      debugFactory.enable(baseCmd);
-    }
 
     const cmdArgs = this._prepareCmdArgs();
     const cmdRan = `${baseCmd} ${cmdArgs.join(" ")}`;
