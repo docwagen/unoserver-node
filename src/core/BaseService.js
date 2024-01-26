@@ -94,6 +94,11 @@ class BaseService {
           }
           break;
         case "string":
+          // to guard against arguments with spaces from causing executed commands to fail
+          // remove surrounding whitespace, attempt to remove quotes
+          let argString = String(argValue).trim().replace(/'|"/g, "");
+          cmdArgs.push(actualArg, `'${argString}'`);
+          break;
         default:
           cmdArgs.push(actualArg, String(argValue));
       }

@@ -107,6 +107,22 @@ The server must be running before this command is executed. The following attrib
 
 - **_outFile_**: The path to the converted file (for stdout). Also required.
 
+#### A note on converting files
+
+The export filter specifies the format, according to libreoffice specifications, to which a file is converted. While an attempt is typically made to
+automatically select this filter, in some cases, this fails and you have to explicitly specify a filter e.g. [conversions from HTML to DOCX](https://github.com/unoconv/unoserver/pull/59).
+See snippet below:
+
+```js
+const { stdout, stderr } = await new Unoconverter(true)
+  .setConvertTo("docx")
+  .setInFile("PATH_TO_YOUR_HTML_FILE")
+  .setOutFile(outFilePath)
+  // No need to wrap string arguments with spaces in quotes for shell execution as the package automatically does this
+  .setFilter("Office Open XML Text")
+  .execCmd();
+```
+
 #### Running the unocompare command
 
 The `unocompare` command is supported by the `Unocompare` class, which connects to a listener, tries to compare two documents, and converts the resulting document. See an example code snippet below:

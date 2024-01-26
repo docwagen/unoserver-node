@@ -4,7 +4,7 @@ class Unoconverter extends BaseService {
   _BASE_CMD = "unoconvert";
   _CMD_ARGS_MAP = {
     convertTo: "--convert-to",
-    filter: "filter",
+    filter: "--filter",
     filterOption: "--filter-option",
     host: "--host",
     port: "--port",
