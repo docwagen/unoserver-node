@@ -1,6 +1,6 @@
 {
   "name": "@docwagen/unoserver-node",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "NodeJS Unoserver Wrapper to convert between different document formats",
   "main": "src/index",
   "scripts": {
