@@ -4,6 +4,8 @@ class Unoconverter extends BaseService {
   _BASE_CMD = "unoconvert";
   _CMD_ARGS_MAP = {
     convertTo: "--convert-to",
+    inputFilter: "--input-filter",
+    outputFilter: "--output-filter",
     filter: "--filter",
     filterOption: "--filter-option",
     host: "--host",
@@ -29,8 +31,29 @@ class Unoconverter extends BaseService {
   }
 
   /**
+   * Sets the LibreOffice input filter to be used if autodetect fails
+   * @param {String} inputFilter
+   * @returns self
+   */
+  setInputFilter(inputFilter) {
+    this._inputArgs.inputFilter = inputFilter;
+    return this;
+  }
+
+  /**
+   * Sets the export filter to be used for the conversion
+   * @param {String} outputFilter
+   * @returns self
+   */
+  setOutputFilter(outputFilter) {
+    this._inputArgs.outputFilter = outputFilter;
+    return this;
+  }
+
+  /**
    * The export filter to use when converting.
    * It is selected automatically if not specified.
+   * Prefer the `setOuputFilter` method to this
    * @param {String} filter
    * @returns self
    */
@@ -64,16 +87,6 @@ class Unoconverter extends BaseService {
   }
 
   /**
-   * Sets the port used by the server, defaults to "2002"
-   * @param {String} port
-   * @returns self
-   */
-  setPort(port) {
-    this._inputArgs.port = port;
-    return this;
-  }
-
-  /**
    * Sets the host location. This determines the handling of files and can only be one of three values -
    * `auto`, `remote`, and `local`. If you run the client on the same machine as the server, it can be set to `local`,
    * and the files are sent as paths. If they are different machines, it is `remote` and the files are sent as binary data.
@@ -96,7 +109,7 @@ class Unoconverter extends BaseService {
    * @returns self
    */
   setInFile(inFile) {
-    this._inputArgs.inFile = inFile;
+    this._inputArgs.inFile = `"${inFile.trim()}"`;
     return this;
   }
 
@@ -106,7 +119,7 @@ class Unoconverter extends BaseService {
    * @returns self
    */
   setOutFile(outFile) {
-    this._inputArgs.outFile = outFile;
+    this._inputArgs.outFile = `"${outFile.trim()}"`;
     return this;
   }
 

@@ -42,6 +42,16 @@ class BaseService {
   }
 
   /**
+   * Sets the port used by the server, defaults to "2003"
+   * @param {String} port
+   * @returns self
+   */
+  setPort(port) {
+    this._inputArgs["port"] = Number.parseInt(port);
+    return this;
+  }
+
+  /**
    * Set callback function to be run when the child process closes
    * i.e. the process's stdio streams have been closed.
    * The callback signature must be (result, error) => {...}
@@ -98,6 +108,9 @@ class BaseService {
           // remove surrounding whitespace, attempt to remove quotes
           let argString = String(argValue).trim().replace(/'|"/g, "");
           cmdArgs.push(actualArg, `'${argString}'`);
+          break;
+        case "number":
+          cmdArgs.push(actualArg, argValue);
           break;
         default:
           cmdArgs.push(actualArg, String(argValue));

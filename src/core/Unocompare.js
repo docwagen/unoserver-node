@@ -35,16 +35,6 @@ class Unocompare extends BaseService {
   }
 
   /**
-   * Sets the port used by the server, defaults to "2002"
-   * @param {String} port
-   * @returns self
-   */
-  setPort(port) {
-    this._inputArgs["port"] = port;
-    return this;
-  }
-
-  /**
    * Sets the host location. This determines the handling of files and can only be one of three values -
    * `auto`, `remote`, and `local`. If you run the client on the same machine as the server, it can be set to `local`,
    * and the files are sent as paths. If they are different machines, it is `remote` and the files are sent as binary data.

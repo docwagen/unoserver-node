@@ -5,6 +5,7 @@ class Unoserver extends BaseService {
     serverInterface: "--interface",
     port: "--port",
     unoInterface: "--uno-interface",
+    unoPort: "--uno-port",
     daemon: "--daemon",
     libreOfficePath: "--executable",
     libreOfficeUserProfilePath: "--user-installation",
@@ -25,22 +26,22 @@ class Unoserver extends BaseService {
   }
 
   /**
-   * Set the port used by the XMLRPC server. This defaults to "2003"
-   * @param {String} port
-   * @returns self
-   */
-  setPort(port) {
-    this._inputArgs["port"] = port;
-    return this;
-  }
-
-  /**
-   * Sets the interface used by the LibreOffice server. Defaults to "2002"
+   * Sets the interface used by the LibreOffice server. Defaults to "127.0.0.1"
    * @param {String} unoInterface
    * @returns self
    */
   setUnoInterface(unoInterface) {
     this._inputArgs["unoInterface"] = unoInterface;
+    return this;
+  }
+
+  /**
+   * Sets the port used by the LibreOffice server. Defaults to "2002"
+   * @param {String} unoPort
+   * @returns self
+   */
+  setUnoPort(unoPort) {
+    this._inputArgs["unoPort"] = Number.parseInt(unoPort);
     return this;
   }
 
@@ -75,7 +76,7 @@ class Unoserver extends BaseService {
 
   /**
    * Sets the path to a file that the LibreOffice Process ID will be written to.
-   * If unoserver is run as a daemon, this file will nt be deleted when unoserver exits
+   * If unoserver is run as a daemon, this file will not be deleted when unoserver exits
    * @param {String} processIdFile
    * @returns self
    */
