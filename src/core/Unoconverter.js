@@ -31,7 +31,7 @@ class Unoconverter extends BaseService {
   }
 
   /**
-   * Sets the LibreOffice input filter to be used if autodetect fails
+   * Sets the LibreOffice input filter to be used if autodetect fails. New for unoserver v2.1
    * @param {String} inputFilter
    * @returns self
    */
@@ -41,7 +41,7 @@ class Unoconverter extends BaseService {
   }
 
   /**
-   * Sets the export filter to be used for the conversion
+   * Sets the export filter to be used for the conversion. New for unoserver v2.1
    * @param {String} outputFilter
    * @returns self
    */
@@ -51,9 +51,8 @@ class Unoconverter extends BaseService {
   }
 
   /**
-   * The export filter to use when converting.
+   * The export filter to use when converting. Deprecated alias for `--output-filter`
    * It is selected automatically if not specified.
-   * Prefer the `setOuputFilter` method to this
    * @param {String} filter
    * @returns self
    */

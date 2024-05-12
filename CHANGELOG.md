@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+#### 2.2.0
+
+- fixed bug with the `setPort` methods
+- added `setUnoPort` method to `Unoserver` class to set the libreoffice port
+- added the new unoserver v2.1 `--input-filter` & `--output-filter` options with the `setInputFilter` & `setOutputFilter` methods in the `Unoserver` class
+
 #### 2.1.0
 
 - fix: wrong mapping for filter in `Unoconverter` class command argument map

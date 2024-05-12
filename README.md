@@ -96,11 +96,11 @@ The server must be running before this command is executed. The following attrib
 
 - **_convertTo_**: The file type/extension of the result output file (ex pdf). Required when using stdout.
 
-- **_inputFilter_**: The LibreOffice input filter to use (ex 'writer8'), if autodetect fails
+- **_inputFilter_**: The LibreOffice input filter to use (ex 'writer8'), if autodetect fails. This works for the newer unoserver v2.1.
 
-- **_outputFilter_**: The export filter to be used for conversions
+- **_outputFilter_**: The export filter to be used for conversions. It is selected automatically if not specified. This works for the newer unoserver v2.1.
 
-- **_filter_**: The export filter to use when converting. It is selected automatically if not specified.
+- **_filter_**: The export filter to use when converting. Deprecated alias for **outputFilter**. Stick with the `setFilter` method for old unoserver versions.
 
 - **_filterOption_**: Pass an option for the export filter, in name=value format. Use true/false for boolean values. The unoserver library supports repeating this flag for multiple options, this can be achieved by chaining the `addFilterOption(name, value)` method as many times as the number of filter options desired
 
