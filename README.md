@@ -34,7 +34,7 @@ const { Unoserver } = require("@docwagen/unoserver-node");
 const unoserver = new Unoserver(true);
 const unoServerProcess = unoserver
   .setServerInterface("127.0.0.1")
-  .setPort("2003")
+  .setPort(2003)
   .makeDaemon()
   .run();
 ```
@@ -45,7 +45,9 @@ The following attributes can be set (their descriptions are mostly from the [uno
 
 - **_port_**: the port used by the XMLRPC server. This defaults to "2003".
 
-- **_unoInterface_**: the interface used by the LibreOffice server. Defaults to "2002".
+- **_unoInterface_**: the interface used by the LibreOffice server. Defaults to "127.0.0.1".
+
+- **_unoPort_**: the port used by the LibreOffice server. Defaults to "2002"
 
 - **_daemon_**: attribute to run unoserver as a daemon. This is the only attribute that does not have a direct setter method. The `makeDaemon()` method sets it internally.
 
@@ -86,6 +88,7 @@ const { stdout, stderr } = await new Unoconverter(true)
   .setConvertTo("pdf")
   .setInFile("README.md")
   .setOutFile("readme.pdf")
+  .setPort(2003)
   .execCmd();
 ```
 
@@ -93,7 +96,11 @@ The server must be running before this command is executed. The following attrib
 
 - **_convertTo_**: The file type/extension of the result output file (ex pdf). Required when using stdout.
 
-- **_filter_**: The export filter to use when converting. It is selected automatically if not specified.
+- **_inputFilter_**: The LibreOffice input filter to use (ex 'writer8'), if autodetect fails. This works for the newer unoserver v2.1.
+
+- **_outputFilter_**: The export filter to be used for conversions. It is selected automatically if not specified. This works for the newer unoserver v2.1.
+
+- **_filter_**: The export filter to use when converting. Deprecated alias for **outputFilter**. Stick with the `setFilter` method for old unoserver versions.
 
 - **_filterOption_**: Pass an option for the export filter, in name=value format. Use true/false for boolean values. The unoserver library supports repeating this flag for multiple options, this can be achieved by chaining the `addFilterOption(name, value)` method as many times as the number of filter options desired
 
