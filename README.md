@@ -106,7 +106,7 @@ The server must be running before this command is executed. The following attrib
 
 - **_host_**: The server host. Defaults to "127.0.0.1".
 
-- **_port_**: The server port, defaults to "2002".
+- **_port_**: The server port, defaults to "2003".
 
 - **_hostLocation_**: This determines the handling of files and can only be one of three values - `auto`, `remote`, and `local`. If you run the client on the same machine as the server, it can be set to `local`, and the files are sent as paths. If they are different machines, it is `remote` and the files are sent as binary data. Default is `auto`, and it will send the file as a path if the host is `127.0.0.1` or `localhost`, and binary data for other hosts.
 
@@ -149,7 +149,7 @@ The server must also be running before this command is executed. The following a
 
 - **_host_**: The server host. Defaults to "127.0.0.1".
 
-- **_port_**: The server port, defaults to "2002".
+- **_port_**: The server port, defaults to "2003".
 
 - **_hostLocation_**: This determines the handling of files and can only be one of three values - `auto`, `remote`, and `local`. If you run the client on the same machine as the server, it can be set to `local`, and the files are sent as paths. If they are different machines, it is `remote` and the files are sent as binary data. Default is `auto`, and it will send the file as a path if the host is `127.0.0.1` or `localhost`, and binary data for other hosts.
 
